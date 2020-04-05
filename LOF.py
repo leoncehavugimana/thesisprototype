@@ -11,9 +11,11 @@ from sklearn.model_selection import RepeatedKFold
 np.get_printoptions()
 np.set_printoptions(precision=3, suppress=True)
 
-localOutlierFactor = LocalOutlierFactor( n_neighbors=5,algorithm='auto',metric='euclidean',novelty=False)
+localOutlierFactor = LocalOutlierFactor(n_neighbors=20,algorithm='auto',metric='euclidean',novelty=False)
 
-# Compute average silhouette coefficient for a 3D array of subsequences
+'''
+Compute average silhouette coefficient for a 3D array of subsequences
+'''
 def computeSilhouette(proper_3d):
     subSeqPerDay = np.size(proper_3d, 1)
     subSeq = 0
@@ -27,10 +29,12 @@ def computeSilhouette(proper_3d):
         break
     return round((sum(silhouetteList) / len(silhouetteList)), 3)
 
-# Find silhouette coefficient for each fold, then computer average
+''' 
+Find silhouette coefficient for each fold, then computer average
+'''
 daysChunks_Array = buildSequences('data/A', '5min')
-length = 3
-rkf = RepeatedKFold(n_splits=2, n_repeats=2)
+length = 12
+rkf = RepeatedKFold(n_splits=2, n_repeats=10)
 silhouettesList = []
 for train_index, test_index in rkf.split(daysChunks_Array):
     train_DaysChunks = np.take(daysChunks_Array, train_index, axis=0)

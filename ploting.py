@@ -1,7 +1,6 @@
 def warn(*args, **kwargs):
     pass
 
-
 '''
 # from LOF import allScores
 weeks = mdates.WeekdayLocator()

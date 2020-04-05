@@ -15,7 +15,9 @@ np.set_printoptions(threshold=sys.maxsize)
 
 iForest = IsolationForest()
 
-# Compute average silhouette coefficient for a 3D_array containing subsequences(Several days)
+'''
+Compute average silhouette coefficient for a 3D_array containing subsequences(Several days)
+'''
 def computeSilhouette(proper_3d):
     subSeqPerDay = np.size(proper_3d, 1)
     subSeq = 0
@@ -28,10 +30,12 @@ def computeSilhouette(proper_3d):
         subSeq += 1
     return round((sum(silhouetteList) / len(silhouetteList)), 3)
 
-# Find silhouette coefficient for each fold, then co  mputer average
+'''
+Find silhouette coefficient for each fold, then compute average
+'''
 daysChunks_Array = buildSequences('data/A', '5min')
-length = 12
-rkf = RepeatedKFold(n_splits=2, n_repeats=2)
+length = 3
+rkf = RepeatedKFold(n_splits=2, n_repeats=10)
 silhouettesList = []
 for train_index, test_index in rkf.split(daysChunks_Array):
     train_DaysChunks = np.take(daysChunks_Array, train_index, axis=0)

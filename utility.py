@@ -12,9 +12,11 @@ raange = pd.date_range(start='2017-02-08 00:00:00', end='2017-05-10 23:59:59', f
 frame_Index = pd.date_range(start='2017-02-08', end='2017-05-10 ', freq='D')
 range_plt = pd.date_range(start='2017-03-01 00:00:00', end='2017-03-28 23:59:59', freq='min')
 
-# dataFile: data file in JSON format
-# frequency: time duration used for resampling eg. "5min"
-# returns 2D-Array with axis-0 representing days and axis-1 including chunks in a day
+'''
+ dataFile: data file in JSON format
+ frequency: time duration used for resampling eg. "5min"
+ returns 2D-Array with axis-0 representing days and axis-1 including chunks in a day
+'''
 def buildSequences(dataFile, frequency):
     with open(dataFile) as f:
         data = json.load(f)
@@ -27,9 +29,11 @@ def buildSequences(dataFile, frequency):
         n_array = series.to_numpy().reshape((92,288))
     return n_array
 
-# daysChunks_Array: 2D-array containing all days and each day with 5-min consumptions
-# length : the subsequence length
-# returns 3D-array holding subSequences contained in sequences
+'''
+ daysChunks_Array: 2D-array containing all days and each day with 5-min consumptions
+ length : the subsequence length
+ returns 3D-array holding subSequences contained in sequences
+'''
 def buildSubSequences(daysChunks_Array, length):
     rows = np.size(daysChunks_Array, 0)
     cols = np.size(daysChunks_Array, 1)
@@ -43,6 +47,7 @@ def buildSubSequences(daysChunks_Array, length):
             subSeq += 1
         day += 1
     return subSeq_3D
+
 
 
 # =======================================================================================================================
