@@ -1,7 +1,6 @@
 def warn(*args, **kwargs):
     pass
 import warnings
-
 warnings.warn = warn
 import sys
 import numpy as np
@@ -34,8 +33,8 @@ def computeSilhouette(proper_3d):
 Find silhouette coefficient for each fold, then compute average
 '''
 daysChunks_Array = buildSequences('data/A', '5min')
-length = 3
-rkf = RepeatedKFold(n_splits=2, n_repeats=10)
+length = 12
+rkf = RepeatedKFold(n_splits=2, n_repeats=2)
 silhouettesList = []
 for train_index, test_index in rkf.split(daysChunks_Array):
     train_DaysChunks = np.take(daysChunks_Array, train_index, axis=0)

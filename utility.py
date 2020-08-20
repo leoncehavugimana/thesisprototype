@@ -1,6 +1,5 @@
 import json
 import sys
-
 import numpy as np
 import pandas as pd
 
@@ -17,7 +16,7 @@ range_plt = pd.date_range(start='2017-03-01 00:00:00', end='2017-03-28 23:59:59'
  frequency: time duration used for resampling eg. "5min"
  returns 2D-Array with axis-0 representing days and axis-1 including chunks in a day
 '''
-def buildSequences(dataFile, frequency):
+def   buildSequences(dataFile, frequency):
     with open(dataFile) as f:
         data = json.load(f)
         dataFrame = pd.DataFrame(data['items'], columns=['timestamp', 'value'])
@@ -47,8 +46,6 @@ def buildSubSequences(daysChunks_Array, length):
             subSeq += 1
         day += 1
     return subSeq_3D
-
-
 
 # =======================================================================================================================
 ''' 

@@ -33,7 +33,7 @@ def computeSilhouette(proper_3d):
 Find silhouette coefficient for each fold, then computer average
 '''
 daysChunks_Array = buildSequences('data/A', '5min')
-length = 12
+length = 3
 rkf = RepeatedKFold(n_splits=2, n_repeats=10)
 silhouettesList = []
 for train_index, test_index in rkf.split(daysChunks_Array):
